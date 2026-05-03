@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/PageShell";
 import { useState } from "react";
-import { allResources } from "@/lib/resourceData";
-import { motion, AnimatePresence } from "framer-motion"; // For better UX
+import { getResources } from "@/api/public";
+import { motion, AnimatePresence } from "framer-motion";
 
 export const Route = createFileRoute("/ai")({
   head: () => ({
@@ -11,10 +11,12 @@ export const Route = createFileRoute("/ai")({
       { name: "description", content: "Ask our AI for help finding resources in Redmond." },
     ],
   }),
+  loader: () => getResources(),
   component: AIPage,
 });
 
 function AIPage() {
+  const allResources = Route.useLoaderData();
   const [prompt, setPrompt] = useState("");
   const [response, setResponse] = useState("");
   const [loading, setLoading] = useState(false);

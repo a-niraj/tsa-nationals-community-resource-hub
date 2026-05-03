@@ -1,9 +1,7 @@
-'use client'
-
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
-import { allResources } from '../lib/resourceData'
+import type { Resource } from '@/lib/types'
 
 delete (L.Icon.Default.prototype as any)._getIconUrl
 L.Icon.Default.mergeOptions({
@@ -12,12 +10,17 @@ L.Icon.Default.mergeOptions({
   shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png',
 })
 
-export function ResourceMap() {
-  if (allResources.length === 0) {
-    return <p>No resources found</p>
+export function ResourceMap({ resources }: { resources: Resource[] }) {
+  const mappable = resources.filter(
+    (r): r is Resource & { lat: number; lng: number } =>
+      typeof r.lat === 'number' && typeof r.lng === 'number'
+  )
+
+  if (mappable.length === 0) {
+    return <p className="text-center text-foreground/60 py-8">No resources with locations yet.</p>
   }
 
-  const center = { lat: allResources[0].lat, lng: allResources[0].lng }
+  const center = { lat: mappable[0].lat, lng: mappable[0].lng }
 
   return (
     <div className="w-full max-w-4xl mx-auto my-8">
@@ -32,7 +35,7 @@ export function ResourceMap() {
       >
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
-        {allResources.map((loc) => (
+        {mappable.map((loc) => (
           <Marker key={loc.id} position={[loc.lat, loc.lng]}>
             <Popup>
               <strong>{loc.name}</strong>

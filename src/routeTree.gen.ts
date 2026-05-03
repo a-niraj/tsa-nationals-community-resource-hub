@@ -9,14 +9,21 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SubmitRouteImport } from './routes/submit'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as MapRouteImport } from './routes/map'
 import { Route as EventsRouteImport } from './routes/events'
 import { Route as CivicRouteImport } from './routes/civic'
 import { Route as AiRouteImport } from './routes/ai'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 
+const SubmitRoute = SubmitRouteImport.update({
+  id: '/submit',
+  path: '/submit',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ServicesRoute = ServicesRouteImport.update({
   id: '/services',
   path: '/services',
@@ -42,6 +49,11 @@ const AiRoute = AiRouteImport.update({
   path: '/ai',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
@@ -56,66 +68,94 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/admin': typeof AdminRoute
   '/ai': typeof AiRoute
   '/civic': typeof CivicRoute
   '/events': typeof EventsRoute
   '/map': typeof MapRoute
   '/services': typeof ServicesRoute
+  '/submit': typeof SubmitRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/admin': typeof AdminRoute
   '/ai': typeof AiRoute
   '/civic': typeof CivicRoute
   '/events': typeof EventsRoute
   '/map': typeof MapRoute
   '/services': typeof ServicesRoute
+  '/submit': typeof SubmitRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/admin': typeof AdminRoute
   '/ai': typeof AiRoute
   '/civic': typeof CivicRoute
   '/events': typeof EventsRoute
   '/map': typeof MapRoute
   '/services': typeof ServicesRoute
+  '/submit': typeof SubmitRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/about'
+    | '/admin'
     | '/ai'
     | '/civic'
     | '/events'
     | '/map'
     | '/services'
+    | '/submit'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/ai' | '/civic' | '/events' | '/map' | '/services'
+  to:
+    | '/'
+    | '/about'
+    | '/admin'
+    | '/ai'
+    | '/civic'
+    | '/events'
+    | '/map'
+    | '/services'
+    | '/submit'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/admin'
     | '/ai'
     | '/civic'
     | '/events'
     | '/map'
     | '/services'
+    | '/submit'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  AdminRoute: typeof AdminRoute
   AiRoute: typeof AiRoute
   CivicRoute: typeof CivicRoute
   EventsRoute: typeof EventsRoute
   MapRoute: typeof MapRoute
   ServicesRoute: typeof ServicesRoute
+  SubmitRoute: typeof SubmitRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/submit': {
+      id: '/submit'
+      path: '/submit'
+      fullPath: '/submit'
+      preLoaderRoute: typeof SubmitRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/services': {
       id: '/services'
       path: '/services'
@@ -151,6 +191,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AiRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about': {
       id: '/about'
       path: '/about'
@@ -171,11 +218,13 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  AdminRoute: AdminRoute,
   AiRoute: AiRoute,
   CivicRoute: CivicRoute,
   EventsRoute: EventsRoute,
   MapRoute: MapRoute,
   ServicesRoute: ServicesRoute,
+  SubmitRoute: SubmitRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
