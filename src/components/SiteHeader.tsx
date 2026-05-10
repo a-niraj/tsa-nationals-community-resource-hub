@@ -26,7 +26,7 @@ const footerNav = [...nav, submitLink] as const;
 export function SiteHeader() {
   return (
     <header className="border-b border-border/60 bg-background/80 backdrop-blur sticky top-0 z-30">
-      <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between gap-6">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-3 sm:gap-6">
         <Link to="/" className="flex items-center gap-2 group">
           <span className="w-8 h-8 rounded-full bg-primary grid place-items-center text-primary-foreground font-display font-black">
             r
@@ -104,7 +104,7 @@ export function SiteHeader() {
 export function SiteFooter() {
   return (
     <footer className="mt-24 border-t border-border/60 bg-card">
-      <div className="max-w-6xl mx-auto px-6 py-14 grid gap-10 md:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)] text-sm">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-14 grid gap-10 md:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)] text-sm">
         <div className="max-w-md">
           <div className="font-display font-black text-3xl text-primary">seattle.together</div>
           <p className="mt-4 text-base leading-7 text-muted-foreground">
@@ -130,7 +130,7 @@ export function SiteFooter() {
       </div>
 
       <div className="border-t border-border/60">
-        <div className="max-w-6xl mx-auto px-6 py-5 text-sm leading-6 text-muted-foreground">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-5 text-sm leading-6 text-muted-foreground">
           Made with care by community members. Not affiliated with the City of Seattle.
         </div>
       </div>

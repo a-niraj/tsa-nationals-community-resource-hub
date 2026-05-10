@@ -25,7 +25,6 @@ type FormData = {
   category: string
   description: string
   address: string
-  phone: string
   website: string
   contact: string
 }
@@ -35,7 +34,6 @@ const emptyForm: FormData = {
   category: '',
   description: '',
   address: '',
-  phone: '',
   website: '',
   contact: '',
 }
@@ -70,7 +68,6 @@ function SubmitPage() {
     if (!form.name.trim()) next.name = 'Required'
     if (!form.category) next.category = 'Required'
     if (!form.description.trim()) next.description = 'Required'
-    if (!form.phone.trim()) next.phone = 'Required'
     if (!form.contact.trim()) next.contact = 'Required'
     setErrors(next)
     return Object.keys(next).length === 0
@@ -116,7 +113,7 @@ function SubmitPage() {
         <form
           onSubmit={handleSubmit}
           noValidate
-          className="rounded-3xl bg-card border border-border p-7 space-y-5"
+          className="rounded-3xl bg-card border border-border p-5 sm:p-7 space-y-5"
         >
           <Field label="Resource name" required error={errors.name}>
             <input
@@ -162,16 +159,6 @@ function SubmitPage() {
               onChange={e => update('address', e.target.value)}
               placeholder="Street, city"
               className={inputClass(false)}
-            />
-          </Field>
-
-          <Field label="Phone" required error={errors.phone}>
-            <input
-              type="tel"
-              value={form.phone}
-              onChange={e => update('phone', e.target.value)}
-              placeholder="(206) 555-0123"
-              className={inputClass(!!errors.phone)}
             />
           </Field>
 

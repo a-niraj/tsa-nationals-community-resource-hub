@@ -8,8 +8,8 @@ import { motion, AnimatePresence } from "framer-motion";
 export const Route = createFileRoute("/ai")({
   head: () => ({
     meta: [
-      { title: "AI Assistance — Redmond Together" },
-      { name: "description", content: "Ask our AI for help finding resources in Redmond." },
+      { title: "AI Assistance — Seattle Together" },
+      { name: "description", content: "Ask our AI for help finding resources in the Seattle area." },
     ],
   }),
   loader: () => getResources(),

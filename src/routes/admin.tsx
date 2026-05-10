@@ -262,7 +262,7 @@ function AdminPage() {
           const isUp = !!uploading[sub.id]
           const err = rowError[sub.id]
           return (
-            <article key={sub.id} className="rounded-3xl bg-card border border-border p-7 space-y-4">
+            <article key={sub.id} className="rounded-3xl bg-card border border-border p-5 sm:p-7 space-y-4">
               <div>
                 <div className="flex items-center gap-2 text-xs uppercase tracking-wide text-muted-foreground">
                   <span className="w-2 h-2 rounded-full bg-rose" />
@@ -276,24 +276,26 @@ function AdminPage() {
 
               <dl className="grid sm:grid-cols-2 gap-2 text-sm text-foreground/70">
                 {sub.address && (
-                  <div>
+                  <div className="min-w-0">
                     <dt className="text-xs uppercase tracking-wide text-muted-foreground">Address</dt>
-                    <dd>{sub.address}</dd>
+                    <dd className="break-words">{sub.address}</dd>
                   </div>
                 )}
-                <div>
-                  <dt className="text-xs uppercase tracking-wide text-muted-foreground">Phone</dt>
-                  <dd>{sub.phone}</dd>
-                </div>
+                {sub.phone && (
+                  <div className="min-w-0">
+                    <dt className="text-xs uppercase tracking-wide text-muted-foreground">Phone</dt>
+                    <dd className="break-words">{sub.phone}</dd>
+                  </div>
+                )}
                 {sub.website && (
-                  <div>
+                  <div className="min-w-0">
                     <dt className="text-xs uppercase tracking-wide text-muted-foreground">Website</dt>
                     <dd className="truncate">{sub.website}</dd>
                   </div>
                 )}
-                <div>
+                <div className="min-w-0">
                   <dt className="text-xs uppercase tracking-wide text-muted-foreground">Submitted by</dt>
-                  <dd>{sub.contact}</dd>
+                  <dd className="break-words">{sub.contact}</dd>
                 </div>
               </dl>
 
@@ -321,14 +323,14 @@ function AdminPage() {
                     className="rounded-full bg-background border border-border px-4 py-2 text-sm focus:outline-none focus:border-primary"
                   />
                 </div>
-                <div className="flex gap-2 items-center">
+                <div className="flex flex-col sm:flex-row gap-2 sm:items-center">
                   <input
                     placeholder="Image URL"
                     value={draft.image}
                     onChange={e => updateDraft(sub.id, { image: e.target.value })}
-                    className="rounded-full bg-background border border-border px-4 py-2 text-sm flex-1 focus:outline-none focus:border-primary"
+                    className="rounded-full bg-background border border-border px-4 py-2 text-sm flex-1 min-w-0 focus:outline-none focus:border-primary"
                   />
-                  <label className="cursor-pointer rounded-full border border-border px-4 py-2 text-sm font-medium hover:bg-secondary transition whitespace-nowrap">
+                  <label className="cursor-pointer rounded-full border border-border px-4 py-2 text-sm font-medium hover:bg-secondary transition text-center whitespace-nowrap">
                     {isUp ? 'Uploading...' : 'Upload image'}
                     <input
                       type="file"

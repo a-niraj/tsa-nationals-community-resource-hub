@@ -4,7 +4,7 @@
   "sideEffects": false,
   "type": "module",
   "scripts": {
-    "dev": "bash scripts/dev.sh",
+    "dev": "node scripts/dev.mjs",
     "dev:vite": "vite dev",
     "build": "vite build && node scripts/post-build.js",
     "build:dev": "vite build --mode development && node scripts/post-build.js",

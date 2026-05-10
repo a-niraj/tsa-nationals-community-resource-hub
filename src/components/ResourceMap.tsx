@@ -31,7 +31,7 @@ export function ResourceMap({ resources }: { resources: Resource[] }) {
   const zoom = mappable.length === 1 ? 13 : 11;
 
   return (
-    <div className="w-full max-w-4xl mx-auto my-8">
+    <div className="w-full max-w-4xl mx-auto my-8 min-w-0">
       <h2 className="text-xl font-semibold mb-4 text-center text-primary">
         Find a Community Resource Nearby
       </h2>
@@ -39,7 +39,7 @@ export function ResourceMap({ resources }: { resources: Resource[] }) {
       <MapContainer
         center={[center.lat, center.lng]}
         zoom={zoom}
-        style={{ height: "400px", width: "100%", borderRadius: "8px" }}
+        className="h-[60vh] min-h-[320px] max-h-[500px] w-full rounded-lg"
       >
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
@@ -54,16 +54,21 @@ export function ResourceMap({ resources }: { resources: Resource[] }) {
               <br />
               {loc.phone && <span>📞 {loc.phone}</span>}
               <br />
-              {loc.website && (
-                <a
-                  href={`https://${loc.website}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-600 hover:underline"
-                >
-                  🌐 {loc.website}
-                </a>
-              )}
+              {loc.website && (() => {
+                const cleaned = loc.website.replace(/\s+/g, "").trim();
+                const href = /^https?:\/\//i.test(cleaned) ? cleaned : `https://${cleaned}`;
+                const label = cleaned.replace(/^https?:\/\//i, "").replace(/\/$/, "");
+                return (
+                  <a
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-600 hover:underline"
+                  >
+                    🌐 {label}
+                  </a>
+                );
+              })()}
             </Popup>
           </Marker>
         ))}

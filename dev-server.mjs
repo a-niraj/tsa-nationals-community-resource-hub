@@ -1,10 +1,14 @@
 import express from 'express';
-import { readFileSync } from 'fs';
+import { readFileSync, existsSync } from 'fs';
 
-// Load .env manually and save to module-level variables
-const envContent = readFileSync('.env', 'utf-8');
+const envFile = ['.env', '.env.local'].find(f => existsSync(f));
+if (!envFile) {
+  console.error('[DEV API] No .env or .env.local file found');
+  process.exit(1);
+}
+const envContent = readFileSync(envFile, 'utf-8');
 const ENV = {};
-envContent.split('\n').forEach(line => {
+envContent.split(/\r?\n/).forEach(line => {
   if (line && !line.startsWith('#')) {
     const [key, value] = line.split('=');
     if (key && value) {

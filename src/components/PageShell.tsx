@@ -17,16 +17,16 @@ export function PageShell({
     <div className="min-h-screen flex flex-col">
       <SiteHeader />
       <main className="flex-1">
-        <section className="max-w-6xl mx-auto px-6 pt-16 pb-10">
+        <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-10 sm:pt-16 pb-8 sm:pb-10">
           <span className="inline-flex items-center gap-2 rounded-full bg-sage px-3 py-1 text-xs font-semibold text-sage-foreground uppercase tracking-wide">
             {eyebrow}
           </span>
-          <h1 className="mt-5 text-5xl md:text-6xl font-black text-primary leading-[0.95]">
+          <h1 className="mt-5 text-4xl sm:text-5xl md:text-6xl font-black text-primary leading-[1] break-words">
             {title}
           </h1>
-          <p className="mt-5 text-lg text-foreground/75 max-w-2xl">{intro}</p>
+          <p className="mt-5 text-base sm:text-lg text-foreground/75 max-w-2xl">{intro}</p>
         </section>
-        <section className="max-w-6xl mx-auto px-6">{children}</section>
+        <section className="max-w-6xl mx-auto px-4 sm:px-6">{children}</section>
       </main>
       <SiteFooter />
     </div>
@@ -69,7 +69,7 @@ export function ResourceCard({
           ? "bg-crimson"
           : "bg-primary";
   return (
-    <article className="rounded-3xl bg-card border border-border p-6 hover:border-primary transition hover:-translate-y-1">
+    <article className="rounded-3xl bg-card border border-border p-5 sm:p-6 hover:border-primary transition hover:-translate-y-1 min-w-0">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <div className="flex items-center gap-2 text-xs uppercase tracking-wide text-muted-foreground">
           <span className={`w-2 h-2 rounded-full ${dot}`} />
@@ -100,9 +100,9 @@ export function ResourceCard({
           )}
         </div>
       </div>
-      <h3 className="mt-3 text-xl font-bold text-primary">{title}</h3>
-      <p className="mt-2 text-sm text-foreground/75">{description}</p>
-      {meta && <div className="mt-4 text-xs font-medium text-foreground/60">{meta}</div>}
+      <h3 className="mt-3 text-xl font-bold text-primary break-words">{title}</h3>
+      <p className="mt-2 text-sm text-foreground/75 break-words">{description}</p>
+      {meta && <div className="mt-4 text-xs font-medium text-foreground/60 break-words">{meta}</div>}
       {websiteUrl && (
         <a
           href={websiteUrl}
@@ -119,12 +119,12 @@ export function ResourceCard({
 }
 
 function formatExternalUrl(value?: string): string | undefined {
-  const trimmed = value?.trim();
-  if (!trimmed) return undefined;
-  return /^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`;
+  const cleaned = value?.replace(/\s+/g, "").trim();
+  if (!cleaned) return undefined;
+  return /^https?:\/\//i.test(cleaned) ? cleaned : `https://${cleaned}`;
 }
 
 function formatWebsiteLabel(value?: string): string {
-  const trimmed = value?.trim() ?? "";
-  return trimmed.replace(/^https?:\/\//i, "").replace(/\/$/, "");
+  const cleaned = value?.replace(/\s+/g, "").trim() ?? "";
+  return cleaned.replace(/^https?:\/\//i, "").replace(/\/$/, "");
 }

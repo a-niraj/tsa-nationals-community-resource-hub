@@ -38,15 +38,15 @@ function EventsPage() {
     >
       <div className="grid gap-4 pb-16">
         {events.map((e) => (
-          <article key={e.title} className="rounded-3xl bg-card border border-border p-5 md:p-6 flex flex-col md:flex-row md:items-center gap-5 hover:border-primary transition">
-            <div className={`shrink-0 rounded-2xl px-5 py-3 text-center font-display ${accentBg[e.accent]}`}>
+          <article key={e.title} className="rounded-3xl bg-card border border-border p-5 md:p-6 flex flex-col md:flex-row md:items-center gap-4 sm:gap-5 hover:border-primary transition min-w-0">
+            <div className={`self-start shrink-0 rounded-2xl px-4 sm:px-5 py-2 sm:py-3 text-center font-display ${accentBg[e.accent]}`}>
               <div className="text-xs font-bold tracking-widest opacity-80">{e.day}</div>
-              <div className="text-2xl font-black leading-tight">{e.date}</div>
+              <div className="text-xl sm:text-2xl font-black leading-tight">{e.date}</div>
             </div>
-            <div className="flex-1">
+            <div className="flex-1 min-w-0">
               <div className="text-xs uppercase tracking-wide text-muted-foreground">{e.tag}</div>
-              <h3 className="mt-1 text-2xl font-bold text-primary">{e.title}</h3>
-              <p className="text-sm text-foreground/70 mt-1">{e.time} · {e.place}</p>
+              <h3 className="mt-1 text-xl sm:text-2xl font-bold text-primary">{e.title}</h3>
+              <p className="text-sm text-foreground/70 mt-1 break-words">{e.time} · {e.place}</p>
             </div>
             <button className="self-start md:self-auto rounded-full border-2 border-primary px-4 py-2 text-sm font-semibold text-primary hover:bg-primary hover:text-primary-foreground transition">
               Add to calendar

@@ -50,12 +50,12 @@ function AboutPage() {
       title="Built by neighbors, for neighbors."
       intro="Seattle Together is an independent, volunteer-run hub that pulls together the best local services, events, and civic info in one friendly and accessible place."
     >
-      <div className="grid gap-8 md:grid-cols-2 pb-16">
-        <div className="rounded-3xl bg-card border border-border p-7">
+      <div className="grid gap-6 sm:gap-8 md:grid-cols-2 pb-16">
+        <div className="rounded-3xl bg-card border border-border p-5 sm:p-7 min-w-0">
           <h2 className="text-2xl font-bold text-primary">Why we made this</h2>
           <p className="mt-3 text-foreground/75">Seattle is full of incredible resources, but they're scattered across dozens of websites, PDFs, and bulletin boards. We wanted one warm, plainspoken place to point a neighbor when they ask "where do I start?"</p>
         </div>
-        <div className="rounded-3xl bg-sage text-sage-foreground p-7">
+        <div className="rounded-3xl bg-sage text-sage-foreground p-5 sm:p-7 min-w-0">
           <h2 className="text-2xl font-bold">How to help</h2>
           <ul className="mt-3 space-y-2 text-foreground/80">
             <li>• Suggest a missing resource or correction</li>
@@ -63,8 +63,8 @@ function AboutPage() {
             <li>• Volunteer to help us keep listings fresh</li>
           </ul>
         </div>
-        <div className="md:col-span-2 rounded-3xl bg-primary text-primary-foreground p-8">
-          <h2 className="text-3xl font-black">Get in touch</h2>
+        <div className="md:col-span-2 rounded-3xl bg-primary text-primary-foreground p-5 sm:p-8 min-w-0">
+          <h2 className="text-2xl sm:text-3xl font-black">Get in touch</h2>
           <p className="mt-2 opacity-80 max-w-xl">Drop us a line and we'll get back within a few days. We read everything.</p>
           <form onSubmit={handleSend} className="mt-6 grid gap-3 md:grid-cols-2 max-w-2xl">
             <input
