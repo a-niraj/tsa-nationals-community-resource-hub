@@ -4,6 +4,7 @@ import { useState } from "react";
 import { getResources } from "@/api/public";
 import { motion, AnimatePresence } from "framer-motion";
 
+
 export const Route = createFileRoute("/ai")({
   head: () => ({
     meta: [
@@ -26,46 +27,43 @@ function AIPage() {
     setLoading(true);
     setResponse("");
 
-
-    const API_KEY = "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";
-    const API_URL = "https://api.groq.com/openai/v1/chat/completions";
-
     try {
-      const res = await fetch(API_URL, {
+      const apiUrl = 'http://localhost:3001/api/ai';
+
+      const res = await fetch(apiUrl, {
         method: "POST",
         headers: {
-          "Authorization": `Bearer ${API_KEY}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          model: "llama-3.3-70b-versatile",
-          messages: [
-            {
-              role: "system",
-              content: `You are a helpful assistant for Seattle community resources. Provide very short, concise, and accurate answers (1-2 sentences). 
-              Context: ${JSON.stringify(allResources).slice(0, 2000)}`
-            },
-            {
-              role: "user",
-              content: prompt
-            }
-          ],
-          temperature: 0.5,
-          max_tokens: 200,
+          prompt,
+          context: JSON.stringify(allResources).slice(0, 2000),
         }),
       });
 
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}));
+        const errorMsg = errorData.error || res.statusText;
+        console.error("API Error:", errorMsg);
+        setResponse(`Error: ${errorMsg}`);
+        return;
+      }
+
       const data = await res.json();
+      console.log("API Response:", data);
 
       if (data.error) {
         console.error("Groq API Error:", data.error);
-        setResponse(`System Error: ${data.error.message}`);
+        setResponse(`System Error: ${data.error}`);
       } else {
         const text = data?.choices?.[0]?.message?.content || "No response received.";
         setResponse(text);
       }
     } catch (error) {
-      setResponse("Connection failed. Check your network.");
+      const msg = error instanceof Error ? error.message : String(error);
+      console.error("Fetch error:", error);
+      console.error("API URL was:", 'http://localhost:3001/api/ai');
+      setResponse(`Connection failed: ${msg}`);
     } finally {
       setLoading(false);
     }
