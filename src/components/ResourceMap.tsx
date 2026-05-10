@@ -21,7 +21,14 @@ export function ResourceMap({ resources }: { resources: Resource[] }) {
     return <p className="text-center text-foreground/60 py-8">No resources with locations yet.</p>;
   }
 
-  const center = { lat: mappable[0].lat, lng: mappable[0].lng };
+  const center = mappable.reduce(
+    (acc, loc) => ({
+      lat: acc.lat + loc.lat / mappable.length,
+      lng: acc.lng + loc.lng / mappable.length,
+    }),
+    { lat: 0, lng: 0 },
+  );
+  const zoom = mappable.length === 1 ? 13 : 11;
 
   return (
     <div className="w-full max-w-4xl mx-auto my-8">
@@ -31,7 +38,7 @@ export function ResourceMap({ resources }: { resources: Resource[] }) {
 
       <MapContainer
         center={[center.lat, center.lng]}
-        zoom={13}
+        zoom={zoom}
         style={{ height: "400px", width: "100%", borderRadius: "8px" }}
       >
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />

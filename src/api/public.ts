@@ -85,12 +85,6 @@ const submissionSchema = z.object({
   category: z.string().trim().min(1).max(100),
   description: z.string().trim().min(1).max(2000),
   address: z.string().trim().max(300).optional().or(z.literal('')),
-  phone: z
-    .string()
-    .min(1)
-    .max(50)
-    .transform(s => s.replace(/\D/g, ''))
-    .refine(s => s.length >= 7 && s.length <= 15, 'phone must be 7 to 15 digits'),
   website: z.string().trim().max(300).optional().or(z.literal('')),
   contact: z.string().trim().min(1).max(200),
 })
@@ -102,6 +96,7 @@ export const submitResource = createServerFn({ method: 'POST' })
     const { error } = await supabaseAdmin.from('pending_submissions').insert({
       ...rest,
       address: address || null,
+      phone: '',
       website: website || null,
     })
     if (error) throw new Error(error.message)

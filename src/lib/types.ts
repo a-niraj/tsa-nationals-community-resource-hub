@@ -19,7 +19,7 @@ export type PendingSubmission = {
   category: string
   description: string
   address: string | null
-  phone: string
+  phone: string | null
   website: string | null
   contact: string
   status: 'pending' | 'approved' | 'rejected'

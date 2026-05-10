@@ -63,7 +63,7 @@ export const approveSubmission = createServerFn({ method: 'POST' })
       category: submission.category,
       description: submission.description,
       address: submission.address,
-      phone: submission.phone,
+      phone: submission.phone || null,
       website: submission.website,
       icon: data.icon ?? null,
       image: data.image ?? null,

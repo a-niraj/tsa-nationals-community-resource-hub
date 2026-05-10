@@ -18,8 +18,10 @@ const nav = [
   { to: "/events", label: "Events" },
   { to: "/civic", label: "Civic" },
   { to: "/about", label: "About" },
-  { to: "/submit", label: "Submit" },
 ] as const;
+
+const submitLink = { to: "/submit", label: "Submit a New Resource" } as const;
+const footerNav = [...nav, submitLink] as const;
 
 export function SiteHeader() {
   return (
@@ -49,10 +51,14 @@ export function SiteHeader() {
         </nav>
         <div className="flex items-center gap-2">
           <Link
-            to="/services"
-            className="hidden sm:inline-flex items-center gap-1 rounded-full bg-rose px-4 py-2 text-sm font-semibold text-rose-foreground hover:bg-crimson transition-colors"
+            to={submitLink.to}
+            className="hidden sm:inline-flex items-center rounded-full bg-sage px-4 py-2 text-sm font-semibold text-sage-foreground transition-colors hover:bg-sage/80"
+            activeProps={{
+              className:
+                "hidden sm:inline-flex items-center rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground",
+            }}
           >
-            Find help <span aria-hidden>&rarr;</span>
+            {submitLink.label}
           </Link>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -78,13 +84,13 @@ export function SiteHeader() {
                   </Link>
                 </DropdownMenuItem>
               ))}
-              <DropdownMenuSeparator />
+              <DropdownMenuSeparator className="sm:hidden" />
               <DropdownMenuItem asChild className="rounded-xl p-0 sm:hidden">
                 <Link
-                  to="/services"
-                  className="w-full rounded-xl bg-rose px-3 py-2 font-semibold text-rose-foreground"
+                  to={submitLink.to}
+                  className="w-full rounded-xl bg-sage px-3 py-2 font-semibold text-sage-foreground"
                 >
-                  Find help
+                  {submitLink.label}
                 </Link>
               </DropdownMenuItem>
             </DropdownMenuContent>
@@ -109,7 +115,7 @@ export function SiteFooter() {
         <nav aria-label="Footer navigation" className="md:justify-self-end">
           <div className="font-semibold text-foreground">Explore</div>
           <ul className="mt-4 grid grid-cols-2 gap-x-10 gap-y-3 text-muted-foreground sm:grid-cols-3 md:grid-cols-2">
-            {nav.map((n) => (
+            {footerNav.map((n) => (
               <li key={n.to}>
                 <Link
                   to={n.to}
