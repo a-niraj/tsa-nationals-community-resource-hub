@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { ExternalLink } from "lucide-react";
 import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
 
 export function PageShell({
@@ -35,14 +36,18 @@ export function ResourceCard({
   category,
   description,
   meta,
+  website,
   accent = "rose",
 }: {
   title: string;
   category: string;
   description: string;
   meta?: string;
+  website?: string;
   accent?: "rose" | "sage" | "primary" | "crimson";
 }) {
+  const websiteUrl = formatExternalUrl(website);
+  const websiteLabel = formatWebsiteLabel(website);
   const dot =
     accent === "rose"
       ? "bg-rose"
@@ -60,6 +65,28 @@ export function ResourceCard({
       <h3 className="mt-3 text-xl font-bold text-primary">{title}</h3>
       <p className="mt-2 text-sm text-foreground/75">{description}</p>
       {meta && <div className="mt-4 text-xs font-medium text-foreground/60">{meta}</div>}
+      {websiteUrl && (
+        <a
+          href={websiteUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-4 inline-flex max-w-full items-center gap-2 text-sm font-semibold text-primary underline-offset-4 transition hover:underline"
+        >
+          <span className="truncate">{websiteLabel}</span>
+          <ExternalLink className="h-4 w-4 shrink-0" aria-hidden="true" />
+        </a>
+      )}
     </article>
   );
+}
+
+function formatExternalUrl(value?: string): string | undefined {
+  const trimmed = value?.trim();
+  if (!trimmed) return undefined;
+  return /^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`;
+}
+
+function formatWebsiteLabel(value?: string): string {
+  const trimmed = value?.trim() ?? "";
+  return trimmed.replace(/^https?:\/\//i, "").replace(/\/$/, "");
 }
