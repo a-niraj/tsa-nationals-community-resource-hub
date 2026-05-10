@@ -84,9 +84,4 @@ export default {
 
 fs.writeFileSync(path.join(distServerDir, 'handler.js'), handlerCode);
 
-const wranglerJsonPath = path.join(distServerDir, 'wrangler.json');
-const wranglerConfig = JSON.parse(fs.readFileSync(wranglerJsonPath, 'utf-8'));
-wranglerConfig.main = 'handler.js';
-fs.writeFileSync(wranglerJsonPath, JSON.stringify(wranglerConfig));
-
-console.log('✓ Post-build: Generated handler.js and updated wrangler.json');
+console.log('✓ Post-build: Generated handler.js');
