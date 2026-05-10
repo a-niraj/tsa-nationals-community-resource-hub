@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, Heart } from "lucide-react";
 import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
 
 export function PageShell({
@@ -21,7 +21,9 @@ export function PageShell({
           <span className="inline-flex items-center gap-2 rounded-full bg-sage px-3 py-1 text-xs font-semibold text-sage-foreground uppercase tracking-wide">
             {eyebrow}
           </span>
-          <h1 className="mt-5 text-5xl md:text-6xl font-black text-primary leading-[0.95]">{title}</h1>
+          <h1 className="mt-5 text-5xl md:text-6xl font-black text-primary leading-[0.95]">
+            {title}
+          </h1>
           <p className="mt-5 text-lg text-foreground/75 max-w-2xl">{intro}</p>
         </section>
         <section className="max-w-6xl mx-auto px-6">{children}</section>
@@ -34,17 +36,27 @@ export function PageShell({
 export function ResourceCard({
   title,
   category,
+  city,
   description,
   meta,
   website,
   accent = "rose",
+  likeCount,
+  liked = false,
+  likeDisabled = false,
+  onToggleLike,
 }: {
   title: string;
   category: string;
+  city?: string;
   description: string;
   meta?: string;
   website?: string;
   accent?: "rose" | "sage" | "primary" | "crimson";
+  likeCount?: number;
+  liked?: boolean;
+  likeDisabled?: boolean;
+  onToggleLike?: () => void;
 }) {
   const websiteUrl = formatExternalUrl(website);
   const websiteLabel = formatWebsiteLabel(website);
@@ -52,15 +64,41 @@ export function ResourceCard({
     accent === "rose"
       ? "bg-rose"
       : accent === "sage"
-      ? "bg-sage"
-      : accent === "crimson"
-      ? "bg-crimson"
-      : "bg-primary";
+        ? "bg-sage"
+        : accent === "crimson"
+          ? "bg-crimson"
+          : "bg-primary";
   return (
     <article className="rounded-3xl bg-card border border-border p-6 hover:border-primary transition hover:-translate-y-1">
-      <div className="flex items-center gap-2 text-xs uppercase tracking-wide text-muted-foreground">
-        <span className={`w-2 h-2 rounded-full ${dot}`} />
-        {category}
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <div className="flex items-center gap-2 text-xs uppercase tracking-wide text-muted-foreground">
+          <span className={`w-2 h-2 rounded-full ${dot}`} />
+          {category}
+        </div>
+        <div className="flex items-center gap-1.5">
+          {city && (
+            <span className="rounded-full border border-border bg-background px-2.5 py-1 text-xs font-semibold text-foreground/70">
+              {city}
+            </span>
+          )}
+          {typeof likeCount === "number" && onToggleLike && (
+            <button
+              type="button"
+              onClick={onToggleLike}
+              disabled={likeDisabled}
+              aria-pressed={liked}
+              aria-label={`${liked ? "Unlike" : "Like"} ${title}. ${likeCount} likes`}
+              className={`inline-flex items-center gap-1 rounded-full border px-2 py-1 text-xs font-semibold transition disabled:cursor-not-allowed disabled:opacity-60 ${
+                liked
+                  ? "border-rose bg-rose text-rose-foreground"
+                  : "border-border bg-background text-foreground/75 hover:border-rose hover:text-rose"
+              }`}
+            >
+              <Heart className={`h-3.5 w-3.5 ${liked ? "fill-current" : ""}`} aria-hidden="true" />
+              {likeCount}
+            </button>
+          )}
+        </div>
       </div>
       <h3 className="mt-3 text-xl font-bold text-primary">{title}</h3>
       <p className="mt-2 text-sm text-foreground/75">{description}</p>

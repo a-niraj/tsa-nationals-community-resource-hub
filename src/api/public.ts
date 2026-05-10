@@ -21,6 +21,21 @@ export const getLikes = createServerFn({ method: 'GET' }).handler(async () => {
   return counts
 })
 
+const likedResourcesSchema = z.object({
+  userId: z.string().trim().min(1).max(64),
+})
+
+export const getLikedResources = createServerFn({ method: 'GET' })
+  .inputValidator((data: unknown) => likedResourcesSchema.parse(data))
+  .handler(async ({ data }) => {
+    const { data: likedResources, error } = await supabaseAdmin
+      .from('resource_likes')
+      .select('resource_id')
+      .eq('user_id', data.userId)
+    if (error) throw new Error(error.message)
+    return (likedResources ?? []).map(row => row.resource_id)
+  })
+
 const toggleLikeSchema = z.object({
   resourceId: z.number().int().positive(),
   userId: z.string().trim().min(1).max(64),

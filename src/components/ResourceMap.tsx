@@ -1,26 +1,27 @@
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
-import L from 'leaflet'
-import 'leaflet/dist/leaflet.css'
-import type { Resource } from '@/lib/types'
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
+import type { Resource } from "@/lib/types";
+import { getCityFromAddress } from "@/lib/resource-city";
 
-delete (L.Icon.Default.prototype as any)._getIconUrl
+delete (L.Icon.Default.prototype as { _getIconUrl?: unknown })._getIconUrl;
 L.Icon.Default.mergeOptions({
-  iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png',
-  iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png',
-  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png',
-})
+  iconRetinaUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png",
+  iconUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png",
+  shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png",
+});
 
 export function ResourceMap({ resources }: { resources: Resource[] }) {
   const mappable = resources.filter(
     (r): r is Resource & { lat: number; lng: number } =>
-      typeof r.lat === 'number' && typeof r.lng === 'number'
-  )
+      typeof r.lat === "number" && typeof r.lng === "number",
+  );
 
   if (mappable.length === 0) {
-    return <p className="text-center text-foreground/60 py-8">No resources with locations yet.</p>
+    return <p className="text-center text-foreground/60 py-8">No resources with locations yet.</p>;
   }
 
-  const center = { lat: mappable[0].lat, lng: mappable[0].lng }
+  const center = { lat: mappable[0].lat, lng: mappable[0].lng };
 
   return (
     <div className="w-full max-w-4xl mx-auto my-8">
@@ -31,7 +32,7 @@ export function ResourceMap({ resources }: { resources: Resource[] }) {
       <MapContainer
         center={[center.lat, center.lng]}
         zoom={13}
-        style={{ height: '400px', width: '100%', borderRadius: '8px' }}
+        style={{ height: "400px", width: "100%", borderRadius: "8px" }}
       >
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
@@ -39,6 +40,8 @@ export function ResourceMap({ resources }: { resources: Resource[] }) {
           <Marker key={loc.id} position={[loc.lat, loc.lng]}>
             <Popup>
               <strong>{loc.name}</strong>
+              <br />
+              {getCityFromAddress(loc.address ?? "")}
               <br />
               {loc.address}
               <br />
@@ -59,5 +62,5 @@ export function ResourceMap({ resources }: { resources: Resource[] }) {
         ))}
       </MapContainer>
     </div>
-  )
+  );
 }
