@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
-import heroImg from "@/assets/redmond-hero.jpg";
+import heroImg from "@/pictures/Space_Needle_with_skyline_and_Mount_Rainier_at_sunset,_2000_(3293292089).jpg";
 import { SiteHeader, SiteFooter } from "@/components/SiteHeader";
 import { getResources } from "@/api/public";
 
@@ -80,13 +80,12 @@ function Index() {
               </div>
             </div>
             <div className="relative mx-2 sm:mx-0 min-w-0">
-              <div className="absolute -inset-3 sm:-inset-4 rounded-[2.5rem] bg-rose/30 -rotate-2" />
+              <div className="absolute inset-0 -translate-x-3 -translate-y-3 sm:-translate-x-4 sm:-translate-y-4 rounded-[2rem] bg-sage" />
+              <div className="absolute inset-0 translate-x-3 translate-y-3 sm:translate-x-4 sm:translate-y-4 rounded-[2rem] bg-rose" />
               <img
                 src={heroImg}
-                alt="Illustration of downtown Seattle with evergreen trees and Cascade mountains"
-                width={1280}
-                height={960}
-                className="relative rounded-[2rem] w-full h-auto shadow-xl rotate-1"
+                alt="Space Needle and Seattle skyline with Mount Rainier at sunset"
+                className="relative rounded-[2rem] w-full h-auto shadow-xl"
               />
             </div>
           </div>
@@ -146,9 +145,9 @@ function Index() {
         <section className="mt-16 sm:mt-24 bg-primary text-primary-foreground py-10 sm:py-14">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 grid gap-6 sm:gap-8 grid-cols-2 md:grid-cols-4 text-center md:text-left">
             {[
-              ["x+", "Neighbors served"],
+              ["50+", "Neighbors served"],
               [`${Math.floor(resourceCount / 10) * 10}+`, "Local resources listed"],
-              ["x", "Parks & trails"],
+              ["20+", "Parks & trails"],
               ["100%", "Free to use"],
             ].map(([n, l]) => (
               <div key={l}>

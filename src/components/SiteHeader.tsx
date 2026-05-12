@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Menu } from "lucide-react";
 import {
@@ -24,14 +25,27 @@ const submitLink = { to: "/submit", label: "Submit a New Resource" } as const;
 const footerNav = [...nav, submitLink] as const;
 
 export function SiteHeader() {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <header className="border-b border-border/60 bg-background/80 backdrop-blur sticky top-0 z-30">
+    <header
+      className={`sticky top-0 z-30 border-b border-primary-foreground/10 transition-colors duration-200 ${
+        scrolled ? "bg-primary/75 backdrop-blur" : "bg-primary"
+      }`}
+    >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-3 sm:gap-6">
         <Link to="/" className="flex items-center gap-2 group">
-          <span className="w-8 h-8 rounded-full bg-primary grid place-items-center text-primary-foreground font-display font-black">
-            r
+          <span className="w-8 h-8 rounded-full bg-primary-foreground grid place-items-center text-primary font-display font-black">
+            s
           </span>
-          <span className="font-display font-black text-xl tracking-tight text-primary">
+          <span className="font-display font-black text-xl tracking-tight text-primary-foreground">
             seattle.together
           </span>
         </Link>
@@ -40,9 +54,9 @@ export function SiteHeader() {
             <Link
               key={n.to}
               to={n.to}
-              className="px-3 py-2 rounded-full text-foreground/70 hover:text-foreground hover:bg-secondary transition-colors"
+              className="px-3 py-2 rounded-full text-primary-foreground/75 hover:text-primary-foreground hover:bg-primary-foreground/10 transition-colors"
               activeProps={{
-                className: "px-3 py-2 rounded-full bg-primary text-primary-foreground",
+                className: "px-3 py-2 rounded-full bg-primary-foreground text-primary",
               }}
             >
               {n.label}
@@ -55,7 +69,7 @@ export function SiteHeader() {
             className="hidden sm:inline-flex items-center rounded-full bg-sage px-4 py-2 text-sm font-semibold text-sage-foreground transition-colors hover:bg-sage/80"
             activeProps={{
               className:
-                "hidden sm:inline-flex items-center rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground",
+                "hidden sm:inline-flex items-center rounded-full bg-primary-foreground px-4 py-2 text-sm font-semibold text-primary",
             }}
           >
             {submitLink.label}
@@ -64,7 +78,7 @@ export function SiteHeader() {
             <DropdownMenuTrigger asChild>
               <button
                 type="button"
-                className="inline-flex md:hidden h-10 w-10 items-center justify-center rounded-full border border-border bg-card text-primary transition-colors hover:bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="inline-flex md:hidden h-10 w-10 items-center justify-center rounded-full border border-primary-foreground/20 bg-primary-foreground/10 text-primary-foreground transition-colors hover:bg-primary-foreground/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-foreground/40"
                 aria-label="Open navigation menu"
               >
                 <Menu className="h-5 w-5" />
@@ -103,7 +117,29 @@ export function SiteHeader() {
 
 export function SiteFooter() {
   return (
-    <footer className="mt-24 border-t border-border/60 bg-card">
+    <footer className="mt-24 bg-card">
+      <svg
+        viewBox="0 0 1200 80"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+        className="block w-full h-16 sm:h-20 text-card"
+      >
+        <rect width="1200" height="80" fill="var(--background)" />
+        <g fill="oklch(0.3 0.05 190)">
+          {Array.from({ length: 40 }).map((_, i) => {
+            const cx = i * 32 + 8;
+            const h = 38 + ((i * 13) % 28);
+            const w = 22 + (i % 3) * 4;
+            const baseY = 80;
+            return (
+              <polygon
+                key={cx}
+                points={`${cx},${baseY - h} ${cx - w / 2},${baseY} ${cx + w / 2},${baseY}`}
+              />
+            );
+          })}
+        </g>
+      </svg>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-14 grid gap-10 md:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)] text-sm">
         <div className="max-w-md">
           <div className="font-display font-black text-3xl text-primary">seattle.together</div>

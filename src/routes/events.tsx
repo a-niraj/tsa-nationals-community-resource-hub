@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/PageShell";
+import eventsBanner from "@/pictures/U_Wash_Quad_cherry_blossoms_06.jpg";
 
 export const Route = createFileRoute("/events")({
   head: () => ({
@@ -35,6 +36,10 @@ function EventsPage() {
       eyebrow="Events"
       title="What's on this week."
       intro="A mix of civic gatherings, outdoor adventures, family programs, and good old-fashioned community fun."
+      image={{
+        src: eventsBanner,
+        alt: "Community gathered under cherry blossoms in the University of Washington Quad",
+      }}
     >
       <div className="grid gap-4 pb-16">
         {events.map((e) => (

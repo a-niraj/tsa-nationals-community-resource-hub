@@ -6,11 +6,13 @@ export function PageShell({
   eyebrow,
   title,
   intro,
+  image,
   children,
 }: {
   eyebrow: string;
   title: string;
   intro: string;
+  image?: { src: string; alt: string };
   children: ReactNode;
 }) {
   return (
@@ -18,13 +20,36 @@ export function PageShell({
       <SiteHeader />
       <main className="flex-1">
         <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-10 sm:pt-16 pb-8 sm:pb-10">
-          <span className="inline-flex items-center gap-2 rounded-full bg-sage px-3 py-1 text-xs font-semibold text-sage-foreground uppercase tracking-wide">
-            {eyebrow}
-          </span>
-          <h1 className="mt-5 text-4xl sm:text-5xl md:text-6xl font-black text-primary leading-[1] break-words">
-            {title}
-          </h1>
-          <p className="mt-5 text-base sm:text-lg text-foreground/75 max-w-2xl">{intro}</p>
+          {image ? (
+            <div className="grid gap-8 lg:gap-10 lg:grid-cols-2 lg:items-center">
+              <div className="min-w-0">
+                <span className="inline-flex items-center gap-2 rounded-full bg-sage px-3 py-1 text-xs font-semibold text-sage-foreground uppercase tracking-wide">
+                  {eyebrow}
+                </span>
+                <h1 className="mt-5 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-primary leading-[1.05] break-words">
+                  {title}
+                </h1>
+                <p className="mt-5 text-base sm:text-lg text-foreground/75 max-w-xl">{intro}</p>
+              </div>
+              <div className="relative mx-2 sm:mx-0 min-w-0">
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  className="rounded-[2rem] w-full h-56 sm:h-72 lg:h-80 object-cover shadow-xl"
+                />
+              </div>
+            </div>
+          ) : (
+            <>
+              <span className="inline-flex items-center gap-2 rounded-full bg-sage px-3 py-1 text-xs font-semibold text-sage-foreground uppercase tracking-wide">
+                {eyebrow}
+              </span>
+              <h1 className="mt-5 text-4xl sm:text-5xl md:text-6xl font-black text-primary leading-[1] break-words">
+                {title}
+              </h1>
+              <p className="mt-5 text-base sm:text-lg text-foreground/75 max-w-2xl">{intro}</p>
+            </>
+          )}
         </section>
         <section className="max-w-6xl mx-auto px-4 sm:px-6">{children}</section>
       </main>
