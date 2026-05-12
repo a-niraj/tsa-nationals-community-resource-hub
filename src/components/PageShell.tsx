@@ -11,7 +11,7 @@ export function PageShell({
 }: {
   eyebrow: string;
   title: string;
-  intro: string;
+  intro?: string;
   image?: { src: string; alt: string };
   children: ReactNode;
 }) {
@@ -29,7 +29,9 @@ export function PageShell({
                 <h1 className="mt-5 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-primary leading-[1.05] break-words">
                   {title}
                 </h1>
-                <p className="mt-5 text-base sm:text-lg text-foreground/75 max-w-xl">{intro}</p>
+                {intro && (
+                  <p className="mt-5 text-base sm:text-lg text-foreground/75 max-w-xl">{intro}</p>
+                )}
               </div>
               <div className="relative mx-2 sm:mx-0 min-w-0">
                 <img
@@ -47,7 +49,9 @@ export function PageShell({
               <h1 className="mt-5 text-4xl sm:text-5xl md:text-6xl font-black text-primary leading-[1] break-words">
                 {title}
               </h1>
-              <p className="mt-5 text-base sm:text-lg text-foreground/75 max-w-2xl">{intro}</p>
+              {intro && (
+                <p className="mt-5 text-base sm:text-lg text-foreground/75 max-w-2xl">{intro}</p>
+              )}
             </>
           )}
         </section>
@@ -94,7 +98,7 @@ export function ResourceCard({
           ? "bg-crimson"
           : "bg-primary";
   return (
-    <article className="rounded-3xl bg-card border border-border p-5 sm:p-6 hover:border-primary transition hover:-translate-y-1 min-w-0">
+    <article className="flex h-full flex-col rounded-3xl bg-card border border-border p-5 sm:p-6 hover:border-primary transition hover:-translate-y-1 min-w-0">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <div className="flex items-center gap-2 text-xs uppercase tracking-wide text-muted-foreground">
           <span className={`w-2 h-2 rounded-full ${dot}`} />
@@ -125,20 +129,22 @@ export function ResourceCard({
           )}
         </div>
       </div>
-      <h3 className="mt-3 text-xl font-bold text-primary break-words">{title}</h3>
-      <p className="mt-2 text-sm text-foreground/75 break-words">{description}</p>
-      {meta && <div className="mt-4 text-xs font-medium text-foreground/60 break-words">{meta}</div>}
-      {websiteUrl && (
-        <a
-          href={websiteUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-4 inline-flex max-w-full items-center gap-2 text-sm font-semibold text-primary underline-offset-4 transition hover:underline"
-        >
-          <span className="truncate">{websiteLabel}</span>
-          <ExternalLink className="h-4 w-4 shrink-0" aria-hidden="true" />
-        </a>
-      )}
+      <h3 className="mt-3 text-xl font-bold text-primary break-words line-clamp-2">{title}</h3>
+      <p className="mt-2 text-sm text-foreground/75 break-words line-clamp-4">{description}</p>
+      <div className="mt-auto pt-4">
+        {meta && <div className="text-xs font-medium text-foreground/60 break-words line-clamp-2">{meta}</div>}
+        {websiteUrl && (
+          <a
+            href={websiteUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-3 inline-flex max-w-full items-center gap-2 text-sm font-semibold text-primary underline-offset-4 transition hover:underline"
+          >
+            <span className="truncate">{websiteLabel}</span>
+            <ExternalLink className="h-4 w-4 shrink-0" aria-hidden="true" />
+          </a>
+        )}
+      </div>
     </article>
   );
 }

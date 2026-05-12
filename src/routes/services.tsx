@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { ArrowDownAZ, Heart, Search } from "lucide-react";
 import { PageShell, ResourceCard } from "@/components/PageShell";
+import { Reveal } from "@/components/Reveal";
 import { getLikedResources, getLikes, getResources, toggleLike } from "@/api/public";
 import { getCityFromAddress, RESOURCE_CITIES } from "@/lib/resource-city";
 
@@ -127,6 +128,7 @@ function ServicesPage() {
       title="Help, when you need it."
       intro="A curated list of local organizations, clinics, and programs. Free or low-cost, all year round."
     >
+      <Reveal>
       <div className="mb-8 grid gap-5 rounded-3xl border border-border bg-card p-5 md:p-6">
         <div className="relative">
           <Search className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
@@ -199,25 +201,27 @@ function ServicesPage() {
         </div>
         <div className="text-sm text-muted-foreground">{resultCountLabel}</div>
       </div>
-      <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3 pb-16">
+      </Reveal>
+      <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3 auto-rows-fr pb-16">
         {filteredResources.map((r, i) => {
           const city = getCityFromAddress(r.address ?? "");
 
           return (
-            <ResourceCard
-              key={r.id}
-              title={r.name}
-              category={r.category}
-              city={city}
-              description={r.description}
-              meta={r.address ?? r.phone ?? undefined}
-              website={r.website ?? undefined}
-              accent={ACCENTS[i % ACCENTS.length]}
-              likeCount={likeCounts[r.id] ?? 0}
-              liked={likedResourceIds.has(r.id)}
-              likeDisabled={likeBusy[r.id]}
-              onToggleLike={() => handleToggleLike(r.id)}
-            />
+            <Reveal key={r.id} delay={(i % 6) * 70} className="h-full">
+              <ResourceCard
+                title={r.name}
+                category={r.category}
+                city={city}
+                description={r.description}
+                meta={r.address ?? r.phone ?? undefined}
+                website={r.website ?? undefined}
+                accent={ACCENTS[i % ACCENTS.length]}
+                likeCount={likeCounts[r.id] ?? 0}
+                liked={likedResourceIds.has(r.id)}
+                likeDisabled={likeBusy[r.id]}
+                onToggleLike={() => handleToggleLike(r.id)}
+              />
+            </Reveal>
           );
         })}
         {resources.length === 0 && (

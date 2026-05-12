@@ -66,10 +66,10 @@ export function SiteHeader() {
         <div className="flex items-center gap-2">
           <Link
             to={submitLink.to}
-            className="hidden sm:inline-flex items-center rounded-full bg-sage px-4 py-2 text-sm font-semibold text-sage-foreground transition-colors hover:bg-sage/80"
+            className="hidden sm:inline-flex items-center rounded-lg bg-sage px-5 py-2.5 text-sm font-semibold text-sage-foreground shadow-md transition hover:bg-sage/90 hover:shadow-lg"
             activeProps={{
               className:
-                "hidden sm:inline-flex items-center rounded-full bg-sage/80 px-4 py-2 text-sm font-semibold text-sage-foreground",
+                "hidden sm:inline-flex items-center rounded-lg bg-sage/80 px-5 py-2.5 text-sm font-semibold text-sage-foreground shadow-inner",
             }}
           >
             {submitLink.label}
@@ -102,7 +102,7 @@ export function SiteHeader() {
               <DropdownMenuItem asChild className="rounded-xl p-0 sm:hidden">
                 <Link
                   to={submitLink.to}
-                  className="w-full rounded-xl bg-sage px-3 py-2 font-semibold text-sage-foreground"
+                  className="w-full rounded-lg bg-sage px-3 py-2 font-semibold text-sage-foreground shadow-md"
                 >
                   {submitLink.label}
                 </Link>

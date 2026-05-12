@@ -32,10 +32,6 @@ export function ResourceMap({ resources }: { resources: Resource[] }) {
 
   return (
     <div className="relative z-0 w-full max-w-4xl mx-auto my-8 min-w-0 isolate">
-      <h2 className="text-xl font-semibold mb-4 text-center text-primary">
-        Find a Community Resource Nearby
-      </h2>
-
       <MapContainer
         center={[center.lat, center.lng]}
         zoom={zoom}

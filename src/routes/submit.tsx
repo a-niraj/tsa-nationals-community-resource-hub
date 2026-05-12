@@ -1,6 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useState } from 'react'
 import { PageShell } from '@/components/PageShell'
+import { Reveal } from '@/components/Reveal'
 import { submitResource } from '@/api/public'
 
 const CATEGORIES = [
@@ -110,6 +111,7 @@ function SubmitPage() {
           </div>
         )}
 
+        <Reveal>
         <form
           onSubmit={handleSubmit}
           noValidate
@@ -196,6 +198,7 @@ function SubmitPage() {
             {submitting ? 'Submitting...' : 'Submit'}
           </button>
         </form>
+        </Reveal>
       </div>
     </PageShell>
   )

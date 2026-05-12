@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell, ResourceCard } from "@/components/PageShell";
+import { Reveal } from "@/components/Reveal";
 import civicBanner from "@/pictures/South_Lake_Union_cityscape.jpeg";
 
 export const Route = createFileRoute("/civic")({
@@ -53,9 +54,11 @@ function CivicPage() {
         alt: "South Lake Union park with the Seattle skyline in the background",
       }}
     >
-      <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3 pb-16">
-        {items.map((i) => (
-          <ResourceCard key={i.title} {...i} />
+      <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3 auto-rows-fr pb-16">
+        {items.map((item, idx) => (
+          <Reveal key={item.title} delay={(idx % 3) * 100} className="h-full">
+            <ResourceCard {...item} />
+          </Reveal>
         ))}
       </div>
     </PageShell>
