@@ -42,7 +42,7 @@ export function SiteHeader() {
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-3 sm:gap-6">
         <Link to="/" className="flex items-center gap-2 group">
-          <span className="w-10 h-10 rounded-full bg-primary-foreground grid place-items-center text-primary font-display font-black text-lg">
+          <span className="w-10 h-10 rounded-full bg-primary-foreground grid place-items-center text-primary font-display font-black text-2xl leading-none pb-[3px]">
             s
           </span>
           <span className="font-display font-black text-xl tracking-tight text-primary-foreground">
@@ -125,18 +125,31 @@ export function SiteFooter() {
         className="block w-full h-16 sm:h-20 text-card"
       >
         <rect width="1200" height="80" fill="var(--background)" />
-        <g fill="oklch(0.3 0.05 190)">
+        <g fill="oklch(0.32 0.07 155)">
           {Array.from({ length: 40 }).map((_, i) => {
             const cx = i * 32 + 8;
-            const h = 38 + ((i * 13) % 28);
-            const w = 22 + (i % 3) * 4;
+            const h = 42 + ((i * 13) % 26);
+            const w = 11 + (i % 3) * 2;
             const baseY = 80;
-            return (
-              <polygon
-                key={cx}
-                points={`${cx},${baseY - h} ${cx - w / 2},${baseY} ${cx + w / 2},${baseY}`}
-              />
-            );
+            const tip = baseY - h;
+            const t1 = baseY - h * 0.5;
+            const t2 = baseY - h * 0.22;
+            const points = [
+              [cx, tip],
+              [cx + w * 0.35, t1],
+              [cx + w * 0.2, t1],
+              [cx + w * 0.65, t2],
+              [cx + w * 0.45, t2],
+              [cx + w, baseY],
+              [cx - w, baseY],
+              [cx - w * 0.45, t2],
+              [cx - w * 0.65, t2],
+              [cx - w * 0.2, t1],
+              [cx - w * 0.35, t1],
+            ]
+              .map((p) => p.join(","))
+              .join(" ");
+            return <polygon key={cx} points={points} />;
           })}
         </g>
       </svg>
