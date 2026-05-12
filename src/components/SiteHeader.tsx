@@ -13,11 +13,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 const nav = [
-  { to: "/services", label: "Services" },
+  { to: "/services", label: "Resources" },
   { to: "/map", label: "Map" },
   { to: "/ai", label: "AI Help" },
   { to: "/events", label: "Events" },
-  { to: "/civic", label: "Civic" },
+  { to: "/civic", label: "City Essentials" },
   { to: "/about", label: "About" },
 ] as const;
 
@@ -36,13 +36,13 @@ export function SiteHeader() {
 
   return (
     <header
-      className={`sticky top-0 z-30 border-b border-primary-foreground/10 transition-colors duration-200 ${
+      className={`sticky top-0 z-50 border-b border-primary-foreground/10 transition-colors duration-200 ${
         scrolled ? "bg-primary/75 backdrop-blur" : "bg-primary"
       }`}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-3 sm:gap-6">
         <Link to="/" className="flex items-center gap-2 group">
-          <span className="w-8 h-8 rounded-full bg-primary-foreground grid place-items-center text-primary font-display font-black">
+          <span className="w-10 h-10 rounded-full bg-primary-foreground grid place-items-center text-primary font-display font-black text-lg">
             s
           </span>
           <span className="font-display font-black text-xl tracking-tight text-primary-foreground">
@@ -56,7 +56,7 @@ export function SiteHeader() {
               to={n.to}
               className="px-3 py-2 rounded-full text-primary-foreground/75 hover:text-primary-foreground hover:bg-primary-foreground/10 transition-colors"
               activeProps={{
-                className: "px-3 py-2 rounded-full bg-primary-foreground text-primary",
+                className: "px-3 py-2 rounded-full bg-primary-foreground/15 text-primary-foreground",
               }}
             >
               {n.label}
@@ -69,12 +69,12 @@ export function SiteHeader() {
             className="hidden sm:inline-flex items-center rounded-full bg-sage px-4 py-2 text-sm font-semibold text-sage-foreground transition-colors hover:bg-sage/80"
             activeProps={{
               className:
-                "hidden sm:inline-flex items-center rounded-full bg-primary-foreground px-4 py-2 text-sm font-semibold text-primary",
+                "hidden sm:inline-flex items-center rounded-full bg-sage/80 px-4 py-2 text-sm font-semibold text-sage-foreground",
             }}
           >
             {submitLink.label}
           </Link>
-          <DropdownMenu>
+          <DropdownMenu modal={false}>
             <DropdownMenuTrigger asChild>
               <button
                 type="button"

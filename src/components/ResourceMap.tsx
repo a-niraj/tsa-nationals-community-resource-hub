@@ -31,7 +31,7 @@ export function ResourceMap({ resources }: { resources: Resource[] }) {
   const zoom = mappable.length === 1 ? 13 : 11;
 
   return (
-    <div className="w-full max-w-4xl mx-auto my-8 min-w-0">
+    <div className="relative z-0 w-full max-w-4xl mx-auto my-8 min-w-0 isolate">
       <h2 className="text-xl font-semibold mb-4 text-center text-primary">
         Find a Community Resource Nearby
       </h2>
@@ -39,7 +39,7 @@ export function ResourceMap({ resources }: { resources: Resource[] }) {
       <MapContainer
         center={[center.lat, center.lng]}
         zoom={zoom}
-        className="h-[60vh] min-h-[320px] max-h-[500px] w-full rounded-lg"
+        className="h-[45vh] min-h-[280px] max-h-[500px] sm:h-[60vh] w-full rounded-lg"
       >
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
