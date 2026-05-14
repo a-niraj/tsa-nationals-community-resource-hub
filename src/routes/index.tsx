@@ -208,15 +208,15 @@ function Index() {
               <span className="inline-flex items-center gap-2 rounded-full bg-sage px-3 py-1 text-xs font-semibold text-sage-foreground uppercase tracking-wide">
                 <span className="w-1.5 h-1.5 rounded-full bg-primary" /> Seattle, Washington
               </span>
-                <h1 className="mt-5 text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black leading-[1.05] text-primary">
+                <h1 className="mt-5 text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black leading-[1.05] text-primary">
                   <span className="block mb-2">Resources,</span>
                   <em className="block not-italic text-crimson font-display italic">
                       Simplified.
                   </em>
                 </h1>
               <p className="mt-5 text-base sm:text-lg md:text-xl text-foreground/80 max-w-xl">
-                Your friendly guide to everything happening in Seattle - from farmers
-                markets and library hours to where to recycle paint.
+                Your friendly guide to everything happening in the Greater Seattle area.
+                Resources, services, and events, all in one place.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <Link to="/services" className="inline-flex items-center rounded-full bg-primary px-5 sm:px-6 py-3 text-sm sm:text-base font-semibold text-primary-foreground hover:opacity-90 transition">
