@@ -49,7 +49,7 @@ export function SiteHeader() {
             seattle.together
           </span>
         </Link>
-        <nav className="hidden md:flex items-center gap-1 text-sm font-medium">
+        <nav className="hidden xl:flex items-center gap-1 text-sm font-medium">
           {nav.map((n) => (
             <Link
               key={n.to}
@@ -78,7 +78,7 @@ export function SiteHeader() {
             <DropdownMenuTrigger asChild>
               <button
                 type="button"
-                className="inline-flex md:hidden h-10 w-10 items-center justify-center rounded-full border border-primary-foreground/20 bg-primary-foreground/10 text-primary-foreground transition-colors hover:bg-primary-foreground/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-foreground/40"
+                className="inline-flex xl:hidden h-10 w-10 items-center justify-center rounded-full border border-primary-foreground/20 bg-primary-foreground/10 text-primary-foreground transition-colors hover:bg-primary-foreground/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-foreground/40"
                 aria-label="Open navigation menu"
               >
                 <Menu className="h-5 w-5" />

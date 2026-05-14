@@ -25,32 +25,32 @@ const cities = [
   {
     name: "Seattle",
     img: seattleImg,
-    description: "The big one on Puget Sound. Pike Place Market in the morning, the Space Needle at night, and a whole lot of saltwater shoreline in between.",
+    description: "The major city in Puget Sound. Popular attractions include Pike Place, the Space Needle, and Seattle Aquarium.",
   },
   {
     name: "Redmond",
     img: redmondImg,
-    description: "Quiet Eastside town with Marymoor Park, the Microsoft campus, and miles of flat, easy trail along the Sammamish River.",
+    description: "Small city east of Seattle. Marymoor Park and Sammamish River Trail are perfect destinations for dog walkers, bikers, and anyone looking to go outdoors.",
   },
   {
     name: "Bellevue",
     img: bellevueImg,
-    description: "A walkable downtown next to the Botanical Garden and Mercer Slough wetlands. About 15 minutes from Seattle if traffic cooperates.",
+    description: "Friendly downtown environment next to the Botanical Garden and the Mercer Slough wetlands. About 15 minutes away from Seattle.",
   },
   {
     name: "Kirkland",
     img: kirklandImg,
-    description: "Right on Lake Washington with public beaches, a busy little arts scene at Moss Bay, and Juanita Beach Park up the road.",
+    description: "Located right next to Lake Washington. Public beaches such as Moss Bay and Beach Park are popular during spring and summer.",
   },
   {
     name: "Woodinville",
     img: woodinvilleImg,
-    description: "Wine country, hiding in the suburbs. Over 100 tasting rooms and the northern tip of the Sammamish River Trail.",
+    description: "A wine country, hiding in the suburbs. Over 100 tasting rooms. North end of the Sammamish River Trail.",
   },
   {
     name: "Tukwila",
     img: tukwilaImg,
-    description: "Just south of Seattle near the airport. Home to Westfield Southcenter and, surprisingly, the Museum of Flight.",
+    description: "South of Seattle, right by the airport. The Westfield Southcenter and the Museum of Flight are popular attractions.",
   },
 ] as const;
 
@@ -59,7 +59,7 @@ function MapPage() {
   return (
     <PageShell
       eyebrow="Locations"
-      title="Find resources nearby."
+      title="Where to look around the area."
     >
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 pt-2">
         {cities.map((c, i) => (

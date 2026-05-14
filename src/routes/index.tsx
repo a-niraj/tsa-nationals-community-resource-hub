@@ -169,7 +169,7 @@ export const Route = createFileRoute("/")({
 });
 
 const quickLinks = [
-  { label: "Saturday Market", tag: "This weekend", to: "/events", tone: "rose" },
+  { label: "Northwest Folklife Festival", tag: "Coming Up", to: "/events", tone: "rose" },
   { label: "Marymoor Park", tag: "Outdoors", to: "/civic", tone: "primary" },
   { label: "City Hall", tag: "Civic", to: "/civic", tone: "outline" },
 ] as const;

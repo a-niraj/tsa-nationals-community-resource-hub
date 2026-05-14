@@ -126,7 +126,7 @@ function ServicesPage() {
     <PageShell
       eyebrow="Services"
       title="Help, when you need it."
-      intro="A curated list of local organizations, clinics, and programs. Free or low-cost, all year round."
+      intro="A thorough list of local organizations, clinics, and programs. Affordable and accessible."
     >
       <Reveal>
       <div className="mb-8 grid gap-5 rounded-3xl border border-border bg-card p-5 md:p-6">

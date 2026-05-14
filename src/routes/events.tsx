@@ -22,6 +22,14 @@ const events = [
   { day: "FRI", date: "May 15", title: "Sammamish River Cleanup", time: "5:30 PM", place: "Marymoor Park, Lot G", tag: "Outdoors", accent: "sage" },
   { day: "SAT", date: "May 16", title: "Derby Days Kickoff Concert", time: "6:00 PM", place: "Downtown Park", tag: "Festival", accent: "crimson" },
   { day: "SUN", date: "May 17", title: "Bike to the Farmers Market", time: "8:30 AM", place: "Meets at 520 Trail Head", tag: "Community", accent: "rose" },
+  { day: "SAT", date: "May 22", title: "Northwest Folklife Festival", time: "All Day", place: "Seattle Center", tag: "Festival", accent: "rose" },
+  { day: "THU", date: "May 28", title: "Queen Anne Farmers Market", time: "3:00 PM · 7:00 PM", place: "West Crockett & Queen Anne Ave", tag: "Market", accent: "sage" },
+  { day: "FRI", date: "June 5", title: "Phinney Farmers Market Opens", time: "3:00 PM · 7:00 PM", place: "6761 Phinney Ave N", tag: "Market", accent: "sage" },
+  { day: "SAT", date: "June 6", title: "Pagdiriwang Filipino Festival", time: "10:00 AM · 6:00 PM", place: "Seattle Center", tag: "Festival", accent: "crimson" },
+  { day: "SAT", date: "June 13", title: "Indigenous People Festival", time: "10:00 AM · 5:00 PM", place: "Seattle Center", tag: "Festival", accent: "primary" },
+  { day: "SUN", date: "June 28", title: "Seattle PrideFest", time: "11:00 AM · 6:00 PM", place: "Seattle Center", tag: "Community", accent: "rose" },
+  { day: "SAT", date: "July 11", title: "Polish Festival Seattle", time: "10:00 AM · 6:00 PM", place: "Columbia City", tag: "Festival", accent: "primary" },
+  { day: "FRI", date: "July 24", title: "Bite of Seattle Begins", time: "5:00 PM", place: "Seattle Center", tag: "Festival", accent: "crimson" },
 ] as const;
 
 const accentBg = {
@@ -35,8 +43,8 @@ function EventsPage() {
   return (
     <PageShell
       eyebrow="Events"
-      title="What's on this week."
-      intro="A mix of civic gatherings, outdoor adventures, family programs, and good old-fashioned community fun."
+      title="What's happening in the community."
+      intro="Civic gatherings, outdoor adventures, family programs, community fun."
       image={{
         src: eventsBanner,
         alt: "Community gathered under cherry blossoms in the University of Washington Quad",
