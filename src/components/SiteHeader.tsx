@@ -85,7 +85,7 @@ export function SiteHeader() {
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-56 rounded-2xl p-2">
-              <DropdownMenuLabel className="px-3 py-2 text-xs uppercase tracking-wide text-muted-foreground">
+              <DropdownMenuLabel className="rounded-xl bg-sage/40 px-3 py-2 text-sm font-black uppercase tracking-wide text-primary">
                 Navigation
               </DropdownMenuLabel>
               {nav.map((n) => (

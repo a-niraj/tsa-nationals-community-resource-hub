@@ -177,7 +177,7 @@ const quickLinks = [
 const featured = [
   {
     title: "Local Services",
-    body: "Trusted businesses, food banks, healthcare, and family support — searchable by neighborhood.",
+    body: "Trust businesses, food banks, healthcare, and family support. Searchable by name or city.",
     to: "/services",
     emoji: "",
   },
@@ -214,7 +214,7 @@ function Index() {
                       Simplified.
                   </em>
                 </h1>
-              <p className="mt-5 text-base sm:text-lg md:text-xl text-foreground/80 max-w-xl">
+              <p className="mt-5 text-sm sm:text-base md:text-lg text-foreground/80 max-w-xl">
                 Your friendly guide to everything happening in the Greater Seattle area.
                 Resources, services, and events, all in one place.
               </p>
@@ -233,7 +233,7 @@ function Index() {
 
         {}
         <section className="max-w-6xl mx-auto px-4 sm:px-6 mt-8">
-          <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+          <div className="grid auto-rows-fr gap-4 sm:grid-cols-2 md:grid-cols-3">
             {quickLinks.map((q, i) => {
               const tone =
                 q.tone === "rose"
@@ -242,10 +242,10 @@ function Index() {
                   ? "bg-primary text-primary-foreground"
                   : "border-2 border-foreground text-foreground bg-transparent";
               return (
-                <Reveal key={q.label} delay={i * 100} direction="up">
+                <Reveal key={q.label} delay={i * 100} direction="up" className="h-full">
                   <Link
                     to={q.to}
-                    className={`block rounded-3xl p-5 sm:p-6 transition hover:-translate-y-1 hover:shadow-lg ${tone}`}
+                    className={`flex h-full min-h-32 flex-col justify-start rounded-3xl p-5 sm:p-6 transition hover:-translate-y-1 hover:shadow-lg ${tone}`}
                   >
                     <div className="text-xs uppercase tracking-wide opacity-80">{q.tag}</div>
                     <div className="mt-2 text-xl sm:text-2xl md:text-3xl font-display font-bold">{q.label}</div>
@@ -266,7 +266,6 @@ function Index() {
             <div className="flex items-end justify-between gap-4 mb-8">
               <div>
                 <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-primary">Find your way around.</h2>
-                <p className="text-muted-foreground mt-2 max-w-xl">Three doors into the hub. Pick whichever feels closest to what you need today.</p>
               </div>
             </div>
           </Reveal>
@@ -293,9 +292,9 @@ function Index() {
         <section className="mt-16 sm:mt-24 bg-primary text-primary-foreground py-10 sm:py-14">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 grid gap-6 sm:gap-8 grid-cols-2 md:grid-cols-4 text-center md:text-left">
             {[
-              ["50+", "Neighbors served"],
               [`${Math.floor(resourceCount / 10) * 10}+`, "Local resources listed"],
               ["20+", "Parks & trails"],
+              ["10+", "Events listed"],
               ["100%", "Free to use"],
             ].map(([n, l], i) => (
               <Reveal key={l} delay={i * 120}>
@@ -312,7 +311,7 @@ function Index() {
         <section className="max-w-4xl mx-auto px-4 sm:px-6 mt-16 sm:mt-24 text-center">
           <Reveal>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-primary">Know a resource we're missing?</h2>
-            <p className="mt-4 text-foreground/70 max-w-xl mx-auto">This hub gets better with every neighbor who chips in. Suggest a service, event, or correction.</p>
+            <p className="mt-4 text-foreground/70 max-w-xl mx-auto">Our resource hub improves with ever community member that adds on to it. Submit a resource, add an event, or provide feedback.</p>
             <Link to="/about" className="mt-8 inline-flex items-center rounded-full bg-crimson px-7 py-3 font-semibold text-crimson-foreground hover:opacity-90 transition">
               Get in touch
             </Link>

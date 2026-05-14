@@ -49,13 +49,13 @@ function AboutPage() {
     <PageShell
       eyebrow="About"
       title="Built by neighbors, for neighbors."
-      intro="Seattle Together is an independent, volunteer-run hub that pulls together the best local services, events, and civic info in one friendly and accessible place."
+      intro="Seattle Together is a community resource hub that pulls together the best resources, services, and events in one friendly and accessible website"
     >
       <div className="grid gap-6 sm:gap-8 md:grid-cols-2 pb-16">
         <Reveal direction="left">
           <div className="rounded-3xl bg-card border border-border p-5 sm:p-7 min-w-0 h-full">
             <h2 className="text-2xl font-bold text-primary">Why we made this</h2>
-            <p className="mt-3 text-foreground/75">Seattle is full of incredible resources, but they're scattered across dozens of websites, PDFs, and bulletin boards. We wanted one warm, plainspoken place to point a neighbor when they ask "where do I start?"</p>
+            <p className="mt-3 text-foreground/75">The Greater Seattle Area has many amazing cities with tons of scattered resources and services. We built this website so that all of them are in one place, making it easy for the community to explore.</p>
           </div>
         </Reveal>
         <Reveal direction="right" delay={120}>
@@ -71,7 +71,7 @@ function AboutPage() {
         <Reveal className="md:col-span-2">
         <div className="rounded-3xl bg-primary text-primary-foreground p-5 sm:p-8 min-w-0">
           <h2 className="text-2xl sm:text-3xl font-black">Get in touch</h2>
-          <p className="mt-2 opacity-80 max-w-xl">Drop us a line and we'll get back within a few days. We read everything.</p>
+          <p className="mt-2 opacity-80 max-w-xl">Send a message and we'll reach out within a few days.</p>
           <form onSubmit={handleSend} className="mt-6 grid gap-3 md:grid-cols-2 max-w-2xl">
             <input
               value={name}
@@ -102,7 +102,7 @@ function AboutPage() {
               disabled={submitting}
               className="md:col-span-2 justify-self-start rounded-full bg-rose px-6 py-3 font-semibold text-rose-foreground hover:bg-crimson transition disabled:opacity-50"
             >
-              {submitting ? "Sending..." : "Send note"}
+              {submitting ? "Sending..." : "Send Message"}
             </button>
           </form>
         </div>
