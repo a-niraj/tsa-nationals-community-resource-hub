@@ -5,7 +5,6 @@ const isWindows = process.platform === 'win32';
 
 console.log('Starting development environment...');
 console.log('App: http://localhost:8080');
-console.log('API: http://localhost:3001');
 console.log('');
 
 const children = [];
@@ -48,8 +47,4 @@ function shutdown(code = 0) {
 process.on('SIGINT', () => shutdown(0));
 process.on('SIGTERM', () => shutdown(0));
 
-start('api', 'node', ['dev-server.mjs']);
-
-setTimeout(() => {
-  start('vite', 'npx', ['vite', 'dev', '--port', '8080', '--host', '127.0.0.1']);
-}, 1500);
+start('vite', 'npx', ['vite', 'dev', '--port', '8080', '--host', '127.0.0.1']);

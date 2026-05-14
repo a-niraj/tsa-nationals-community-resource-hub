@@ -20,7 +20,6 @@ dist-ssr
 # Wrangler / Cloudflare
 .wrangler/
 .dev.vars
-dist/server/handler.js
 
 # Editor directories and files
 .vscode/*

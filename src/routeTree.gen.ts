@@ -11,10 +11,10 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SubmitRouteImport } from './routes/submit'
 import { Route as ServicesRouteImport } from './routes/services'
+import { Route as ReferenceRouteImport } from './routes/reference'
 import { Route as MapRouteImport } from './routes/map'
 import { Route as EventsRouteImport } from './routes/events'
 import { Route as CivicRouteImport } from './routes/civic'
-import { Route as AiRouteImport } from './routes/ai'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
@@ -27,6 +27,11 @@ const SubmitRoute = SubmitRouteImport.update({
 const ServicesRoute = ServicesRouteImport.update({
   id: '/services',
   path: '/services',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReferenceRoute = ReferenceRouteImport.update({
+  id: '/reference',
+  path: '/reference',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MapRoute = MapRouteImport.update({
@@ -42,11 +47,6 @@ const EventsRoute = EventsRouteImport.update({
 const CivicRoute = CivicRouteImport.update({
   id: '/civic',
   path: '/civic',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AiRoute = AiRouteImport.update({
-  id: '/ai',
-  path: '/ai',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminRoute = AdminRouteImport.update({
@@ -69,10 +69,10 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/admin': typeof AdminRoute
-  '/ai': typeof AiRoute
   '/civic': typeof CivicRoute
   '/events': typeof EventsRoute
   '/map': typeof MapRoute
+  '/reference': typeof ReferenceRoute
   '/services': typeof ServicesRoute
   '/submit': typeof SubmitRoute
 }
@@ -80,10 +80,10 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/admin': typeof AdminRoute
-  '/ai': typeof AiRoute
   '/civic': typeof CivicRoute
   '/events': typeof EventsRoute
   '/map': typeof MapRoute
+  '/reference': typeof ReferenceRoute
   '/services': typeof ServicesRoute
   '/submit': typeof SubmitRoute
 }
@@ -92,10 +92,10 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/admin': typeof AdminRoute
-  '/ai': typeof AiRoute
   '/civic': typeof CivicRoute
   '/events': typeof EventsRoute
   '/map': typeof MapRoute
+  '/reference': typeof ReferenceRoute
   '/services': typeof ServicesRoute
   '/submit': typeof SubmitRoute
 }
@@ -105,10 +105,10 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/admin'
-    | '/ai'
     | '/civic'
     | '/events'
     | '/map'
+    | '/reference'
     | '/services'
     | '/submit'
   fileRoutesByTo: FileRoutesByTo
@@ -116,10 +116,10 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/admin'
-    | '/ai'
     | '/civic'
     | '/events'
     | '/map'
+    | '/reference'
     | '/services'
     | '/submit'
   id:
@@ -127,10 +127,10 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/admin'
-    | '/ai'
     | '/civic'
     | '/events'
     | '/map'
+    | '/reference'
     | '/services'
     | '/submit'
   fileRoutesById: FileRoutesById
@@ -139,10 +139,10 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   AdminRoute: typeof AdminRoute
-  AiRoute: typeof AiRoute
   CivicRoute: typeof CivicRoute
   EventsRoute: typeof EventsRoute
   MapRoute: typeof MapRoute
+  ReferenceRoute: typeof ReferenceRoute
   ServicesRoute: typeof ServicesRoute
   SubmitRoute: typeof SubmitRoute
 }
@@ -161,6 +161,13 @@ declare module '@tanstack/react-router' {
       path: '/services'
       fullPath: '/services'
       preLoaderRoute: typeof ServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reference': {
+      id: '/reference'
+      path: '/reference'
+      fullPath: '/reference'
+      preLoaderRoute: typeof ReferenceRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/map': {
@@ -182,13 +189,6 @@ declare module '@tanstack/react-router' {
       path: '/civic'
       fullPath: '/civic'
       preLoaderRoute: typeof CivicRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/ai': {
-      id: '/ai'
-      path: '/ai'
-      fullPath: '/ai'
-      preLoaderRoute: typeof AiRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin': {
@@ -219,10 +219,10 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   AdminRoute: AdminRoute,
-  AiRoute: AiRoute,
   CivicRoute: CivicRoute,
   EventsRoute: EventsRoute,
   MapRoute: MapRoute,
+  ReferenceRoute: ReferenceRoute,
   ServicesRoute: ServicesRoute,
   SubmitRoute: SubmitRoute,
 }

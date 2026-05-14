@@ -15,10 +15,10 @@ import {
 const nav = [
   { to: "/services", label: "Resources" },
   { to: "/map", label: "Map" },
-  { to: "/ai", label: "AI Help" },
   { to: "/events", label: "Events" },
   { to: "/civic", label: "City Essentials" },
   { to: "/about", label: "About" },
+  { to: "/reference", label: "Reference" },
 ] as const;
 
 const submitLink = { to: "/submit", label: "Submit a New Resource" } as const;
