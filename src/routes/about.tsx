@@ -49,7 +49,7 @@ function AboutPage() {
     <PageShell
       eyebrow="About"
       title="Built by neighbors, for neighbors."
-      intro="Seattle Together is a community resource hub that pulls together the best resources, services, and events in one friendly and accessible website"
+      intro="Seattle Together is a community resource hub that pulls together the best resources, services, and events in one friendly and accessible website."
     >
       <div className="grid gap-6 sm:gap-8 md:grid-cols-2 pb-16">
         <Reveal direction="left">

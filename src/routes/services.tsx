@@ -4,9 +4,12 @@ import { ArrowDownAZ, Heart, Search } from "lucide-react";
 import { PageShell, ResourceCard } from "@/components/PageShell";
 import { Reveal } from "@/components/Reveal";
 import { getLikedResources, getLikes, getResources, toggleLike } from "@/api/public";
-import { getCityFromAddress, RESOURCE_CITIES } from "@/lib/resource-city";
+import { getCityFromAddress, RESOURCE_CITIES, type ResourceCity } from "@/lib/resource-city";
 
 export const Route = createFileRoute("/services")({
+  validateSearch: (search: Record<string, unknown>): ServicesSearch => ({
+    city: parseCitySearch(search.city),
+  }),
   head: () => ({
     meta: [
       { title: "Local Services — Seattle Together" },
@@ -35,12 +38,18 @@ const ALL_CITIES = "All Cities";
 const USER_ID_STORAGE_KEY = "resource-like-user-id";
 
 type SortOption = "alphabetical" | "mostLiked" | "leastLiked";
+type ServicesSearch = {
+  city?: ResourceCity;
+};
 
 function ServicesPage() {
   const { resources, likes } = Route.useLoaderData();
+  const { city: citySearch } = Route.useSearch();
   const [query, setQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState(ALL_CATEGORIES);
-  const [activeCity, setActiveCity] = useState(ALL_CITIES);
+  const [activeCity, setActiveCity] = useState<ResourceCity | typeof ALL_CITIES>(
+    citySearch ?? ALL_CITIES,
+  );
   const [sortOption, setSortOption] = useState<SortOption>("alphabetical");
   const [likeCounts, setLikeCounts] = useState<Record<number, number>>(likes);
   const [likedResourceIds, setLikedResourceIds] = useState<Set<number>>(() => new Set());
@@ -50,6 +59,10 @@ function ServicesPage() {
   useEffect(() => {
     setLikeCounts(likes);
   }, [likes]);
+
+  useEffect(() => {
+    setActiveCity(citySearch ?? ALL_CITIES);
+  }, [citySearch]);
 
   useEffect(() => {
     const storedUserId = getOrCreateLikeUserId();
@@ -243,6 +256,14 @@ function sortCategories(a: string, b: string): number {
   if (a === "Other") return 1;
   if (b === "Other") return -1;
   return a.localeCompare(b);
+}
+
+function parseCitySearch(value: unknown): ResourceCity | undefined {
+  return typeof value === "string" && isResourceCity(value) ? value : undefined;
+}
+
+function isResourceCity(value: string): value is ResourceCity {
+  return RESOURCE_CITIES.includes(value as ResourceCity);
 }
 
 const SORT_OPTIONS: Array<{

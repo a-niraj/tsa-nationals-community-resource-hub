@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell } from "@/components/PageShell";
 import { ResourceMap } from "@/components/ResourceMap";
 import { Reveal } from "@/components/Reveal";
@@ -64,7 +64,11 @@ function MapPage() {
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 pt-2">
         {cities.map((c, i) => (
           <Reveal key={c.name} delay={(i % 3) * 100}>
-            <article className="group overflow-hidden rounded-3xl bg-card border border-border hover:border-primary transition min-w-0 h-full">
+            <Link
+              to="/services"
+              search={{ city: c.name }}
+              className="group block overflow-hidden rounded-3xl bg-card border border-border hover:border-primary transition min-w-0 h-full"
+            >
               <div className="aspect-[16/10] overflow-hidden">
                 <img
                   src={c.img}
@@ -76,7 +80,7 @@ function MapPage() {
                 <h3 className="text-xl font-bold text-primary">{c.name}</h3>
                 <p className="mt-1 text-sm text-foreground/70 leading-relaxed">{c.description}</p>
               </div>
-            </article>
+            </Link>
           </Reveal>
         ))}
       </div>

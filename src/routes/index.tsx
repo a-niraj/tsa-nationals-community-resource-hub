@@ -111,9 +111,13 @@ function HomeCarousel() {
             />
           ))}
           <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/70 to-transparent p-5 sm:p-6 text-primary-foreground">
-            <div className="font-display text-2xl sm:text-3xl font-black">
+            <Link
+              to="/services"
+              search={{ city: carouselSlides[index].city }}
+              className="inline-flex font-display text-2xl sm:text-3xl font-black underline-offset-4 hover:underline"
+            >
               {carouselSlides[index].city}
-            </div>
+            </Link>
             <div className="text-sm sm:text-base opacity-90">{carouselSlides[index].caption}</div>
           </div>
           <button
